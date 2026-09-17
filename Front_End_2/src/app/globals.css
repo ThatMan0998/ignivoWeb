@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --background: #FFFFFF;
+  --background-secondary: #F4F7FB;
+  --background-tertiary: #E0E9F5;
+  --foreground: #121212;
+  --primary: #0075FF;
+  --primary-light: #00C2FF;
+  --primary-dark: #004BCC;
+  --muted: #666666;
+  --text-secondary: #2D2D2D;
+  --text-tertiary: #666666;
+  --border: #333333;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
+  --color-muted: var(--muted);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-border: var(--border);
+  --font-sans: var(--font-inter);
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+section[id] {
+  scroll-margin-top: 100px;
+}
+
+.hero-scene-grid {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--primary) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--primary) 5%, transparent) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse, black 30%, transparent 75%);
+}
+
+@media (hover: none),
+(pointer: coarse),
+(prefers-reduced-motion: reduce) {
+
+  .hero-scene-content,
+  .hero-scene-background {
+    transform: none !important;
+  }
+}
+
+.hero-pointer-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 520px;
+  height: 520px;
+  margin: -260px 0 0 -260px;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+      color-mix(in srgb, var(--primary-light) 20%, transparent) 0%,
+      color-mix(in srgb, var(--primary) 10%, transparent) 35%,
+      transparent 70%);
+}
+
+@media (hover: none),
+(pointer: coarse),
+(prefers-reduced-motion: reduce) {
+  .hero-pointer-glow {
+    display: none;
+  }
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid var(--primary-dark);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  transform: translateY(-160%);
+  border-radius: 8px;
+  background: var(--primary-dark);
+  color: white;
+  padding: 12px 20px;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  main [style*="opacity"],
+  main [style*="transform"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
