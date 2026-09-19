@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-border pt-16 pb-8">
+    <footer className="bg-background-secondary border-t border-border pt-16 pb-8">
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-2">
@@ -25,11 +25,11 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-foreground mb-4">Liên Kết</h4>
             <ul className="flex flex-col gap-2">
-              <li><Link href="#about" className="text-muted hover:text-primary transition-colors">Giới thiệu</Link></li>
-              <li><Link href="#solutions" className="text-muted hover:text-primary transition-colors">Giải pháp</Link></li>
-              <li><Link href="#products" className="text-muted hover:text-primary transition-colors">Sản phẩm</Link></li>
-              <li><Link href="#team" className="text-muted hover:text-primary transition-colors">Đội ngũ</Link></li>
-              <li><Link href="#faq" className="text-muted hover:text-primary transition-colors">FAQ</Link></li>
+              <li><Link href="/#about" className="text-muted hover:text-primary transition-colors">Giới thiệu</Link></li>
+              <li><Link href="/#solutions" className="text-muted hover:text-primary transition-colors">Giải pháp</Link></li>
+              <li><Link href="/#products" className="text-muted hover:text-primary transition-colors">Sản phẩm</Link></li>
+              <li><Link href="/#team" className="text-muted hover:text-primary transition-colors">Đội ngũ</Link></li>
+              <li><Link href="/#faq" className="text-muted hover:text-primary transition-colors">FAQ</Link></li>
             </ul>
           </div>
           
@@ -48,8 +48,8 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} IGNIVO. All rights reserved.
           </p>
           <div className="flex gap-4">
-            <a href="#" className="text-muted hover:text-primary transition-colors text-sm">Chính sách bảo mật</a>
-            <a href="#" className="text-muted hover:text-primary transition-colors text-sm">Điều khoản sử dụng</a>
+            <Link href="/chinh-sach-bao-mat" className="text-muted hover:text-primary transition-colors text-sm">Chính sách bảo mật</Link>
+            <Link href="/dieu-khoan-su-dung" className="text-muted hover:text-primary transition-colors text-sm">Điều khoản sử dụng</Link>
           </div>
         </div>
       </div>

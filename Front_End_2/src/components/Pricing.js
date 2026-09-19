@@ -36,7 +36,7 @@ const PLANS = [
 
 export default function Pricing() {
   return (
-    <section id="products" className="py-24 bg-background-secondary">
+    <section id="products" className="py-24 bg-transparent">
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground mb-4">
@@ -55,8 +55,8 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative p-8 rounded-3xl bg-white border ${
-                plan.popular ? 'border-primary shadow-xl shadow-primary/10' : 'border-border'
+              className={`relative p-8 rounded-3xl border ${
+                plan.popular ? 'bg-background-secondary border-primary shadow-xl shadow-primary/20 backdrop-blur-sm' : 'bg-white border-border backdrop-blur-sm'
               } flex flex-col`}
             >
               {plan.popular && (
@@ -85,8 +85,8 @@ export default function Pricing() {
                 href="#contact"
                 className={`w-full py-4 rounded-xl font-bold text-center transition-all ${
                   plan.popular
-                    ? 'bg-primary text-white hover:bg-primary-dark shadow-lg shadow-primary/25'
-                    : 'bg-background-tertiary text-primary hover:bg-primary/10'
+                    ? 'bg-primary text-white hover:bg-primary-dark shadow-lg shadow-primary/30'
+                    : 'bg-background-secondary text-primary hover:bg-background-tertiary'
                 }`}
               >
                 Chọn Gói Này

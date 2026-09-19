@@ -1,59 +1,20 @@
-"use client";
-
-import { motion } from 'framer-motion';
+import { Camera, Cpu, BellRing, ArrowRight } from 'lucide-react';
 
 const STEPS = [
-  {
-    num: '01',
-    title: 'Phát Hiện',
-    description: 'Cảm biến và Camera AI liên tục giám sát, phân tích môi trường xung quanh.',
-  },
-  {
-    num: '02',
-    title: 'Xử Lý',
-    description: 'Hệ thống gửi dữ liệu về máy chủ trung tâm để xác minh sự cố trong mili-giây.',
-  },
-  {
-    num: '03',
-    title: 'Cảnh Báo',
-    description: 'Kích hoạt còi báo động, gửi thông báo khẩn cấp đến ứng dụng và số điện thoại.',
-  },
+  { Icon: Camera, num: '01', title: 'Nhận diện', description: 'Camera và cảm biến ghi nhận dấu hiệu bất thường trong không gian.' },
+  { Icon: Cpu, num: '02', title: 'Phân tích', description: 'Tín hiệu được chuyển đến trung tâm xử lý để phân tích tình huống.' },
+  { Icon: BellRing, num: '03', title: 'Cảnh báo', description: 'Thông báo tới ứng dụng và kích hoạt các kênh cảnh báo được cấu hình.' },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 bg-foreground text-background">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <div className="text-center max-w-2xl mx-auto mb-20">
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4">
-            Cách Hoạt Động
-          </h2>
-          <p className="text-background-tertiary text-lg">
-            Quy trình phản ứng nhanh chóng và chính xác tuyệt đối.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-          <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-px bg-white/10" />
-          
-          {STEPS.map((step, index) => (
-            <motion.div
-              key={step.num}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative flex flex-col items-center text-center"
-            >
-              <div className="w-24 h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-3xl font-black text-primary-light mb-6 relative z-10 backdrop-blur-sm">
-                {step.num}
-              </div>
-              <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-              <p className="text-background-tertiary leading-relaxed max-w-xs">
-                {step.description}
-              </p>
-            </motion.div>
-          ))}
+    <section id="how-it-works" className="brand-dark relative overflow-hidden py-24 lg:py-28">
+      <div className="relative mx-auto max-w-6xl px-6">
+        <p className="section-eyebrow !text-primary-light">03 / TỪ TÍN HIỆU ĐẾN HÀNH ĐỘNG</p>
+        <div className="mt-4 mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end"><h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">Một quy trình liền mạch.<br /><span className="text-white/45">Ba bước bảo vệ.</span></h2><a href="#hero" className="inline-flex items-center gap-3 text-sm text-primary-light">Trải nghiệm mô phỏng <ArrowRight className="h-4 w-4" /></a></div>
+        <div className="relative grid gap-10 md:grid-cols-3 md:gap-14">
+          <div className="signal-track" aria-hidden="true"><span /></div>
+          {STEPS.map(({ Icon, num, title, description }) => <article key={num} className="relative"><div className="relative mb-7 flex h-20 w-20 items-center justify-center rounded-2xl border border-primary/50 bg-[#121212] shadow-lg shadow-primary/10"><Icon className="h-7 w-7 text-primary-light" /></div><p className="mb-3 text-xs tracking-widest text-white/40">BƯỚC {num}</p><h3 className="text-2xl font-semibold">{title}</h3><p className="mt-4 max-w-xs text-sm leading-7 text-white/60">{description}</p></article>)}
         </div>
       </div>
     </section>

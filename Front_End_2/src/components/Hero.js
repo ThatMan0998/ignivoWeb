@@ -1,86 +1,30 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import HeroScene from './HeroScene';
 import Link from 'next/link';
-import HeroPointerGlow from './HeroPointerGlow';
+import { motion } from 'framer-motion';
+import { ArrowRight, ArrowDown, Camera, Radio, BellRing } from 'lucide-react';
+import MonitoringDemo from './MonitoringDemo';
+
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden bg-background">
-      <HeroPointerGlow />
-      {/* Subtle Background Elements */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px]" />
-      </div>
-
-      <HeroScene>
-        <div className="container mx-auto px-6 max-w-5xl relative z-10 flex flex-col items-center text-center">
-
-
-          {/* Status Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-8"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-background-tertiary border border-primary/10 text-primary text-xs font-semibold tracking-wide">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              KIẾN TRÚC AN NINH THẾ HỆ MỚI
+    <section id="hero" className="mission-hero relative overflow-hidden pt-36 pb-10 lg:pt-44">
+      <div className="mission-grid absolute inset-0" aria-hidden="true" />
+      <div className="relative mx-auto max-w-6xl px-6">
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-14">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <p className="mb-7 flex items-center gap-3 text-[11px] font-semibold tracking-[0.18em] text-primary-light"><span className="h-px w-8 bg-primary-light" /> IGNIVO / INTELLIGENT SAFETY</p>
+            <h1 className="text-[clamp(2.8rem,5.4vw,4.6rem)] font-semibold leading-[1.12] tracking-[-0.055em]">Phát hiện sớm.<br /><span className="mission-gradient-text">Bảo vệ kịp thời.</span></h1>
+            <p className="mt-7 max-w-md text-base leading-8 text-white/65">Biến camera và cảm biến thành một hệ thống bảo vệ chủ động. Nhìn thấy rủi ro, kết nối thông tin, cảnh báo đúng lúc.</p>
+            <div className="mt-9 flex flex-wrap gap-4">
+              <Link href="#contact" className="inline-flex items-center gap-4 rounded-xl bg-primary px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition hover:-translate-y-1 hover:bg-primary-dark">Nhận tư vấn giải pháp <ArrowRight className="h-4 w-4" /></Link>
+              <Link href="#how-it-works" className="inline-flex items-center gap-2 px-2 py-4 text-sm font-medium text-white/80 hover:text-primary-light">Cách hoạt động <ArrowDown className="h-4 w-4" /></Link>
             </div>
+            <div className="mt-10 flex items-center gap-3 text-xs text-white/50"><span className="flex -space-x-2">{[Camera, Radio, BellRing].map((Icon, i) => <span key={i} className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-[#121212]"><Icon className="h-4 w-4 text-primary-light" /></span>)}</span>Camera AI + IoT + Cảnh báo đa kênh</div>
           </motion.div>
-
-          {/* Main Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground leading-[1.1] mb-6"
-          >
-            Hệ Sinh Thái <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-light">
-              Báo Cháy Thông Minh
-            </span>
-          </motion.h1>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-muted text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
-          >
-            Phát hiện sớm các rủi ro cháy nổ và xâm nhập trái phép bằng sức mạnh của Trí Tuệ Nhân Tạo và IoT.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto"
-          >
-            <Link
-              href="#contact"
-              className="group flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/25"
-            >
-              Bắt Đầu Ngay
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="#features"
-              className="flex items-center justify-center px-8 py-4 rounded-full bg-white text-foreground border border-border font-semibold hover:bg-background-secondary transition-all"
-            >
-              Tìm Hiểu Thêm
-            </Link>
-          </motion.div>
+          <motion.div className="min-w-0" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}><MonitoringDemo /></motion.div>
         </div>
-      </HeroScene>
+        <div className="mt-16 grid grid-cols-1 gap-5 border-t border-white/15 pt-7 text-sm text-white/60 sm:grid-cols-3"><span><b className="mr-3 text-primary-light">01</b> Nhìn thấy dấu hiệu bất thường</span><span><b className="mr-3 text-primary-light">02</b> Kết nối mọi tín hiệu</span><span><b className="mr-3 text-primary-light">03</b> Chủ động thông báo</span></div>
+      </div>
     </section>
   );
 }

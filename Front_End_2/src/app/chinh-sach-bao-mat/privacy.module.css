@@ -1,0 +1,35 @@
+.layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 64px; align-items: start; }
+.sidebar { position: sticky; top: 24px; }
+.contentsHeading { margin-bottom: 18px; color: var(--primary-dark); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+.contents { display: grid; gap: 3px; max-height: calc(100dvh - 110px); overflow-y: auto; padding-right: 8px; list-style: none; }
+.contents a { display: block; padding: 8px 12px; border-left: 2px solid var(--border); color: var(--text-tertiary); font-size: 13px; line-height: 1.6; transition: color .2s, background .2s; }
+.contents a:hover, .contents a:focus-visible { color: var(--primary-dark); background: var(--background-secondary); border-left-color: var(--primary); }
+.mobileContents { display: none; }
+.article { min-width: 0; color: var(--text-secondary); font-size: 16px; line-height: 1.85; overflow-wrap: anywhere; }
+.article section { padding-bottom: 36px; margin-bottom: 36px; border-bottom: 1px solid var(--border); scroll-margin-top: 28px; }
+.article section:target h2 { color: var(--primary-dark); }
+.article h2 { margin-bottom: 20px; color: var(--foreground); font-size: 26px; font-weight: 700; line-height: 1.4; letter-spacing: -.025em; }
+.article h3 { margin-top: 28px; margin-bottom: 14px; color: var(--foreground); font-size: 19px; font-weight: 650; line-height: 1.5; }
+.article p { margin: 16px 0; }
+.article ul { margin: 16px 0; padding-left: 24px; list-style: disc; }
+.article li { padding-left: 4px; margin: 7px 0; }
+.article li::marker { color: var(--primary); }
+.article strong { color: var(--foreground); font-weight: 650; }
+.backToTop { display: inline-flex; align-items: center; gap: 10px; color: var(--primary-dark); font-size: 14px; font-weight: 600; }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .sidebar { position: static; }
+  .desktopContents { display: none; }
+  .mobileContents { display: block; border: 1px solid var(--border); border-radius: 12px; background: var(--background-secondary); }
+  .mobileContents summary { padding: 18px 20px; color: var(--primary-dark); font-weight: 600; cursor: pointer; }
+  .mobileContents .contents { padding: 0 16px 16px; max-height: none; }
+  .article h2 { font-size: 23px; }
+}
+@media print {
+  .sidebar, .backToTop { display: none; }
+  .layout { display: block; padding: 0; }
+  .hero { background: white; color: black; }
+  .hero p { color: black; }
+  .article h2, .article h3 { break-after: avoid; }
+  .article section { border: none; }
+}

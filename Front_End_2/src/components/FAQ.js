@@ -23,7 +23,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="faq" className="py-24 bg-background-secondary">
+    <section id="faq" className="py-24 bg-transparent">
       <div className="container mx-auto px-6 max-w-4xl">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground mb-4">
@@ -34,7 +34,7 @@ export default function FAQ() {
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="border-t border-border">
           {FAQS.map((faq, index) => (
             <motion.div
               key={index}
@@ -42,17 +42,17 @@ export default function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="bg-white border border-border rounded-2xl overflow-hidden"
+              className="border-b border-border overflow-hidden"
             >
               <button
-                className="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none"
-                onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
+                className="w-full px-6 py-5 text-left flex items-center justify-between focus-visible:outline-primary"
+                aria-expanded={openIndex === index} aria-controls={`faq-answer-${index}`} onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
               >
                 <span className="font-bold text-foreground">{faq.question}</span>
                 <ChevronDown className={`w-5 h-5 text-text-secondary transition-transform ${openIndex === index ? 'rotate-180' : ''}`} />
               </button>
               {openIndex === index && (
-                <div className="px-6 pb-5 text-text-secondary leading-relaxed">
+                <div id={`faq-answer-${index}`} className="px-6 pb-5 text-text-secondary leading-relaxed">
                   {faq.answer}
                 </div>
               )}

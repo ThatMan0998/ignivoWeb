@@ -1,60 +1,20 @@
-"use client";
-
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+import { ArrowUpRight, Camera, Radio, BellRing } from 'lucide-react';
+import ProductPreview from './ProductPreview';
 
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-white">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex-1 space-y-6"
-          >
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground">
-              Về IGNIVO
-            </h2>
-            <p className="text-lg text-text-secondary leading-relaxed">
-              IGNIVO là đơn vị tiên phong trong lĩnh vực ứng dụng Trí Tuệ Nhân Tạo (AI) và Internet Vạn Vật (IoT) vào hệ thống cảnh báo và phòng cháy chữa cháy tại Việt Nam.
-            </p>
-            <p className="text-lg text-text-secondary leading-relaxed">
-              Sứ mệnh của chúng tôi là mang đến sự an tâm tuyệt đối cho mọi gia đình và doanh nghiệp thông qua các giải pháp công nghệ đột phá, phát hiện sớm rủi ro và phản ứng tức thì.
-            </p>
-            <div className="pt-4 flex gap-8">
-              <div>
-                <h4 className="text-4xl font-black text-primary mb-2">99%</h4>
-                <p className="text-sm font-medium text-foreground">Độ chính xác</p>
-              </div>
-              <div>
-                <h4 className="text-4xl font-black text-primary mb-2">0.2s</h4>
-                <p className="text-sm font-medium text-foreground">Thời gian phản hồi</p>
-              </div>
-              <div>
-                <h4 className="text-4xl font-black text-primary mb-2">24/7</h4>
-                <p className="text-sm font-medium text-foreground">Giám sát liên tục</p>
-              </div>
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex-1 w-full"
-          >
-            <div className="relative aspect-square md:aspect-video lg:aspect-square bg-background-tertiary rounded-3xl overflow-hidden border border-primary/10">
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent mix-blend-overlay"></div>
-              {/* Optional: Add an image here if available */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Image src="/logo.jpg" alt="IGNIVO Logo Large" width={200} height={200} className="opacity-100 transition-transform duration-500 hover:scale-105" />
-              </div>
-            </div>
-          </motion.div>
+    <section id="about" className="bg-white py-24 lg:py-32">
+      <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-20">
+        <div>
+          <p className="section-eyebrow">01 / HỆ SINH THÁI IGNIVO</p>
+          <h2 className="mt-5 text-4xl font-semibold leading-tight tracking-tight md:text-5xl">Từng thiết bị.<br /><span className="text-muted">Một lớp an tâm.</span></h2>
+          <p className="mt-6 max-w-md leading-8 text-text-secondary">Camera nhìn thấy. Cảm biến ghi nhận. IGNIVO kết nối các tín hiệu để giúp bạn chủ động bảo vệ gia đình và công trình.</p>
+          <div className="mt-8 divide-y divide-border border-y border-border">
+            {[{ Icon: Camera, title: 'Camera AI', text: 'Phân tích hình ảnh và dấu hiệu bất thường' }, { Icon: Radio, title: 'Cảm biến IoT', text: 'Theo dõi những thay đổi của môi trường' }, { Icon: BellRing, title: 'Cảnh báo đa kênh', text: 'Kết nối còi tại chỗ và ứng dụng di động' }].map(({ Icon, title, text }) => <div key={title} className="flex items-center gap-4 py-5"><Icon className="h-5 w-5 shrink-0 text-primary" /><div><h3 className="text-sm font-bold">{title}</h3><p className="mt-1 text-sm text-muted">{text}</p></div></div>)}
+          </div>
+          <a href="#solutions" className="mt-7 inline-flex items-center gap-3 text-sm font-bold text-primary-dark">Khám phá công nghệ <ArrowUpRight className="h-4 w-4" /></a>
         </div>
+        <div className="hardware-stage"><ProductPreview /></div>
       </div>
     </section>
   );
