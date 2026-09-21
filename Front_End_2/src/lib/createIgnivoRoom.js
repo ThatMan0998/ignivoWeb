@@ -10,7 +10,7 @@ export function createIgnivoRoom(host, { onSelect, onAngle, onContextLost }) {
  renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
  renderer.outputColorSpace=T.SRGBColorSpace;
  renderer.domElement.setAttribute('role','img');
- renderer.domElement.setAttribute('aria-label','Căn phòng 3D có bộ IGNIVO tích hợp camera AI và cảm biến IoT trong một vỏ, bộ cảnh báo và vùng quan sát. Dùng các nút chọn thiết bị và thanh góc xoay bên dưới.');
+ renderer.domElement.setAttribute('aria-label','Căn phòng 3D có bộ IGNIVO AI và IoT, Edge Box AI Raspberry Pi 5 và người dùng cầm điện thoại bằng hai tay. Đường truyền đến điện thoại lần lượt xuất hiện khi mô phỏng cháy.');
  host.append(renderer.domElement);
  const palette={'--muted':'#252c39','--border':'#526078','--muted-foreground':'#64748b','--card':'#e0e9f5','--foreground':'#121a28','--viz-series-1':'#00c2ff','--orange':'#ff713e'};
  const color=token=>new T.Color(palette[token]);
@@ -79,8 +79,55 @@ export function createIgnivoRoom(host, { onSelect, onAngle, onContextLost }) {
  cameraHead.quaternion.setFromUnitVectors(new T.Vector3(0,0,1),end.clone().sub(headPosition).normalize());
  unit.updateWorldMatrix(true,true);
  const start=cameraHead.localToWorld(new T.Vector3(0,0,.34));
- const alarm=device('alarm',2.6,2,-2.57);box(.45,.5,.15,0,0,0,white,alarm);sphere(.12,0,.09,.12,accent,alarm);
+ // Stylized Raspberry Pi enclosure on the top shelf.
+ const edge=device('edge',2.65,1.82,-2.32);
+ box(.7,.25,.42,0,0,0,dark,edge);
+ box(.65,.025,.38,0,.14,0,furniture,edge);
+ for(let i=0;i<5;i++)box(.035,.008,.25,-.2+i*.1,.16,0,dark,edge);
+ for(const x of [-.18,.02])box(.12,.09,.025,x,0,.22,white,edge);
+ const edgeIndicator=sphere(.04,.24,0,.23,accent,edge);
+ // A stylized user holds the phone with both hands in front of their chest.
+ const person=new T.Group();person.position.set(.9,0,1.65);room.add(person);
+ const skin=new T.MeshStandardMaterial({color:'#c79573',roughness:.9});
+ const shirt=new T.MeshStandardMaterial({color:'#2386b5',roughness:.85});
+ materials.push([skin],[shirt]);
+ function limb(from,to,radius,material){
+   const a=new T.Vector3(...from),b=new T.Vector3(...to);
+   const mesh=cylinder(radius,a.distanceTo(b),0,0,0,material,person);
+   mesh.position.copy(a).add(b).multiplyScalar(.5);
+   mesh.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),b.sub(a).normalize());
+   return mesh;
+ }
+ for(const side of [-1,1]){
+   box(.20,.12,.34,side*.15,.07,.07,dark,person);
+   limb([side*.15,.15,0],[side*.14,.83,0],.095,furniture);
+ }
+ const torso=sphere(.3,0,1.13,0,shirt,person);torso.scale.set(1,1.35,.62);torso.castShadow=true;
+ cylinder(.075,.17,0,1.49,0,skin,person);
+ const head=new T.Group();head.position.set(0,1.67,.035);head.rotation.x=.28;person.add(head);
+ const face=sphere(.19,0,0,0,skin,head);face.scale.set(.9,1.12,.93);face.castShadow=true;
+ const hair=new T.Mesh(new T.SphereGeometry(.194,20,12,0,Math.PI*2,0,Math.PI/2),dark);hair.position.y=.025;head.add(hair);
+ sphere(.035,0,-.025,.176,skin,head);
+ for(const x of [-.065,.065])sphere(.014,x,.02,.163,dark,head);
+ for(const side of [-1,1]){
+   limb([side*.23,1.37,0],[side*.33,1.10,.2],.075,shirt);
+   sphere(.07,side*.33,1.10,.2,skin,person);
+   limb([side*.33,1.10,.2],[side*.13,1.12,.46],.052,skin);
+   sphere(.067,side*.13,1.12,.46,skin,person);
+ }
+ const phone=device('phone',person.position.x,1.15,person.position.z+.46);
+ phone.scale.setScalar(.36);
+ phone.rotation.set(1.05,Math.PI,0);
+ box(.58,1.12,.09,0,0,0,dark,phone);
+ const phoneScreen=box(.49,.9,.02,0,0,.06,furniture,phone);
+ box(.12,.025,.015,0,.49,.065,white,phone);
+ const notification=box(.4,.22,.02,0,.17,.08,alertMat,phone);
+ notification.visible=false;
+ const phoneLines=new T.Group();phone.add(phoneLines);
+ for(const y of [.22,.15])box(.28,.025,.02,0,y,.10,white,phoneLines);
+ phoneLines.visible=false;
  for(const [id,g] of Object.entries(devices))g.traverse(o=>{if(o.isMesh){o.userData.device=id;hitObjects.push(o)}});
+ person.traverse(o=>{if(o.isMesh){o.userData.device='phone';hitObjects.push(o)}});
  const coverage=new T.Mesh(new T.ConeGeometry(1.1,start.distanceTo(end),32,1,true),glass);
  coverage.position.copy(start).add(end).multiplyScalar(.5);
  coverage.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),start.clone().sub(end).normalize());room.add(coverage);
@@ -89,7 +136,17 @@ export function createIgnivoRoom(host, { onSelect, onAngle, onContextLost }) {
  for(let i=0;i<6;i++){const flame=new T.Mesh(new T.ConeGeometry(.10+i*.007,.36+(i%3)*.16,9),alertMat);flame.position.set(Math.cos(i*2)*.16,.18,Math.sin(i*2)*.12);flame.rotation.z=(i-3)*.08;fire.add(flame)}
  const smokeMat=mat('--muted-foreground',{transparent:true,opacity:.32,depthWrite:false});
  for(let i=0;i<5;i++)sphere(.15+i*.04,Math.sin(i)*.13,.7+i*.22,0,smokeMat,fire);
- const route=new T.Line(new T.BufferGeometry().setFromPoints([fire.position,unit.position.clone().add(new T.Vector3(0,0,.4)),new T.Vector3(2.6,2,-2.4)]),new T.LineDashedMaterial({color:color('--orange'),dashSize:.13,gapSize:.08}));route.computeLineDistances();room.add(route);route.visible=false;
+ function signalPath(points){
+   const path=new T.Line(new T.BufferGeometry().setFromPoints(points),new T.LineDashedMaterial({color:color('--orange'),dashSize:.13,gapSize:.08}));
+   path.computeLineDistances();room.add(path);path.visible=false;return path;
+ }
+ const unitPort=unit.position.clone().add(new T.Vector3(0,0,.4));
+ const edgePort=edge.position.clone().add(new T.Vector3(0,0,.25));
+ const detectionRoute=signalPath([fire.position,unitPort]);
+ const edgeRoute=signalPath([unitPort,edgePort]);
+ phone.updateWorldMatrix(true,true);
+ const phonePort=phone.localToWorld(new T.Vector3(0,.3,.12));
+ const phoneRoute=signalPath([edgePort,new T.Vector3(3.2,2,0),phonePort]);
  scene.add(new T.HemisphereLight(0xffffff,0x777777,2.4));
  const light=new T.DirectionalLight(0xffffff,3);light.position.set(3,8,5);light.castShadow=true;light.shadow.mapSize.set(1024,1024);light.shadow.camera.left=-6;light.shadow.camera.right=6;light.shadow.camera.top=6;light.shadow.camera.bottom=-6;scene.add(light);
 
@@ -141,7 +198,17 @@ export function createIgnivoRoom(host, { onSelect, onAngle, onContextLost }) {
  resize();changed();
  return {
    select(id){if(!devices[id])return;selected=id;coverage.visible=id==='ignivo';draw()},
-   setPhase(phase){fire.visible=phase>0;route.visible=phase>=2;unitIndicator.material=phase>=2?alertMat:accent;alarm.children[1].material=phase===3?alertMat:accent;draw()},
+   setPhase(phase){
+     fire.visible=phase>0;
+     detectionRoute.visible=phase>=2;
+     edgeRoute.visible=phase>=3;
+     phoneRoute.visible=phase>=4;
+     unitIndicator.material=phase>=2?alertMat:accent;
+     edgeIndicator.material=phase>=3?alertMat:accent;
+     phoneScreen.material=phase>=5?dark:furniture;
+     notification.visible=phoneLines.visible=phase>=5;
+     draw();
+   },
    setAngle(degrees){const offset=view.position.clone().sub(controls.target);const spherical=new T.Spherical().setFromVector3(offset);spherical.theta=degrees*Math.PI/180;view.position.copy(controls.target).add(new T.Vector3().setFromSpherical(spherical));controls.update();draw()},
    setDistance(distance){const offset=view.position.clone().sub(controls.target).setLength(distance);view.position.copy(controls.target).add(offset);controls.update();draw()},
    dispose(){
