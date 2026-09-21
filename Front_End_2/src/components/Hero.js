@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowDown, Camera, Radio, BellRing } from 'lucide-react';
-import MonitoringDemo from './MonitoringDemo';
+import IgnivoRoomDemo from './IgnivoRoomDemo';
 
 export default function Hero() {
   return (
@@ -21,7 +21,7 @@ export default function Hero() {
             </div>
             <div className="mt-10 flex items-center gap-3 text-xs text-white/50"><span className="flex -space-x-2">{[Camera, Radio, BellRing].map((Icon, i) => <span key={i} className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-[#121212]"><Icon className="h-4 w-4 text-primary-light" /></span>)}</span>Camera AI + IoT + Cảnh báo đa kênh</div>
           </motion.div>
-          <motion.div className="min-w-0" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}><MonitoringDemo /></motion.div>
+          <motion.div className="min-w-0" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}><IgnivoRoomDemo /></motion.div>
         </div>
         <div className="mt-16 grid grid-cols-1 gap-5 border-t border-white/15 pt-7 text-sm text-white/60 sm:grid-cols-3"><span><b className="mr-3 text-primary-light">01</b> Nhìn thấy dấu hiệu bất thường</span><span><b className="mr-3 text-primary-light">02</b> Kết nối mọi tín hiệu</span><span><b className="mr-3 text-primary-light">03</b> Chủ động thông báo</span></div>
       </div>
