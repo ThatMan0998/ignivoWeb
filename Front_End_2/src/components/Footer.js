@@ -18,10 +18,10 @@ export default function Footer() {
               <span className="font-black text-xl tracking-tight text-foreground">IGNIVO</span>
             </Link>
             <p className="text-muted leading-relaxed max-w-sm">
-              Nền tảng hệ sinh thái cảnh báo cháy nổ thông minh ứng dụng công nghệ IoT và Trí Tuệ Nhân Tạo hàng đầu tại Việt Nam.
+              Hệ thống an ninh và an toàn phòng cháy chữa cháy ứng dụng thị giác máy tính và IoT
             </p>
           </div>
-          
+
           <div>
             <h4 className="font-bold text-foreground mb-4">Liên Kết</h4>
             <ul className="flex flex-col gap-2">
@@ -32,17 +32,25 @@ export default function Footer() {
               <li><Link href="/#faq" className="text-muted hover:text-primary transition-colors">FAQ</Link></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-bold text-foreground mb-4">Liên Hệ</h4>
             <ul className="flex flex-col gap-2 text-muted">
-              <li>Email: contact@ignivo.vn</li>
-              <li>Hotline: 1900 9999</li>
+              <li>
+                <a href="mailto:contact@ignivo.vn" className="hover:text-primary transition-colors">
+                  Email: contact@ignivo.vn
+                </a>
+              </li>
+              <li>
+                <a href="tel:19009999" className="hover:text-primary transition-colors">
+                  Hotline: 1900 9999
+                </a>
+              </li>
               <li>Địa chỉ: Khu Công nghệ cao Hòa Lạc, Hà Nội</li>
             </ul>
           </div>
         </div>
-        
+
         <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-muted text-sm">
             &copy; {new Date().getFullYear()} IGNIVO. All rights reserved.
