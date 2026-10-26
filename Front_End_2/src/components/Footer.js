@@ -37,16 +37,21 @@ export default function Footer() {
             <h4 className="font-bold text-foreground mb-4">Liên Hệ</h4>
             <ul className="flex flex-col gap-2 text-muted">
               <li>
-                <a href="mailto:contact@ignivo.vn" className="hover:text-primary transition-colors">
-                  Email: contact@ignivo.vn
+                <a href="mailto:ignivo01@gmail.com" className="hover:text-primary transition-colors">
+                  Email: ignivo01@gmail.com
                 </a>
               </li>
               <li>
-                <a href="tel:19009999" className="hover:text-primary transition-colors">
-                  Hotline: 1900 9999
+                <span className="text-foreground/80 font-medium">Hotline: </span>
+                <a href="tel:0914757941" className="hover:text-primary transition-colors">
+                  0914 757 941
+                </a>
+                <span> - </span>
+                <a href="tel:0889469948" className="hover:text-primary transition-colors">
+                  0889 469 948
                 </a>
               </li>
-              <li>Địa chỉ: Khu Công nghệ cao Hòa Lạc, Hà Nội</li>
+              <li>Địa chỉ: Số 600, đường Nguyễn Văn Cừ (nối dài), Phường An Bình, Thành phố Cần Thơ</li>
             </ul>
           </div>
         </div>
