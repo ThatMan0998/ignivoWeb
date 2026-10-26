@@ -12,17 +12,20 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <LandingExperience><a href="#main-content" className="skip-link">Đến nội dung chính</a><main id="main-content" tabIndex={-1} className="flex min-h-screen flex-col bg-background">
-      <Navbar />
-      <Hero />
-      <About />
-      <Features />
-      <HowItWorks />
-      <Pricing />
-      <Team />
-      <FAQ />
-      <ContactForm />
-      <Footer />
-    </main></LandingExperience>
+    <LandingExperience>
+      <a href="#main-content" className="skip-link">Đến nội dung chính</a>
+      <main id="main-content" tabIndex={-1} className="flex min-h-screen flex-col bg-background">
+        <Navbar />
+        <Hero />
+        <About />
+        <Features />
+        <HowItWorks />
+        <Pricing />
+        <Team />
+        <FAQ />
+        <ContactForm />
+        <Footer />
+      </main>
+    </LandingExperience>
   );
 }

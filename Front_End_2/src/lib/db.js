@@ -19,10 +19,10 @@ const sqlConfig = {
 let appPool = null;
 
 export async function getConnection() {
-  if (appPool) {
+  if (appPool && appPool.connected) {
     return appPool;
   }
-  
+
   try {
     appPool = await sql.connect(sqlConfig);
     console.log('Connected to SQL Server Database');
