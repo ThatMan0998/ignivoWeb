@@ -15,7 +15,8 @@ import {
   ShieldCheck, 
   Mail, 
   Phone,
-  RotateCcw
+  RotateCcw,
+  MapPin
 } from 'lucide-react';
 
 const initialFormData = {
@@ -183,15 +184,27 @@ export default function ContactForm() {
             {/* Thông tin hỗ trợ trực tiếp */}
             <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm space-y-3">
               <p className="text-xs font-semibold uppercase tracking-wider text-text-secondary">Hoặc kết nối trực tiếp với chúng tôi</p>
-              <div className="flex flex-wrap gap-y-2 gap-x-6 text-sm text-white">
-                <a href="mailto:contact@ignivo.vn" className="flex items-center gap-2 hover:text-[#00C2FF] transition-colors">
-                  <Mail className="w-4 h-4 text-primary-light" />
-                  contact@ignivo.vn
+              <div className="flex flex-col gap-2.5 text-sm text-white">
+                <a href="mailto:ignivo01@gmail.com" className="flex items-center gap-2 hover:text-[#00C2FF] transition-colors">
+                  <Mail className="w-4 h-4 text-primary-light shrink-0" />
+                  ignivo01@gmail.com
                 </a>
-                <a href="tel:19009999" className="flex items-center gap-2 hover:text-[#00C2FF] transition-colors">
-                  <Phone className="w-4 h-4 text-primary-light" />
-                  1900 9999 (Hotline)
-                </a>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-primary-light shrink-0" />
+                    <a href="tel:0914757941" className="hover:text-[#00C2FF] transition-colors">
+                      0914 757 941
+                    </a>
+                  </div>
+                  <span className="text-text-secondary hidden sm:inline">-</span>
+                  <a href="tel:0889469948" className="hover:text-[#00C2FF] transition-colors">
+                    0889 469 948
+                  </a>
+                </div>
+                <div className="flex items-start gap-2 text-text-secondary text-xs pt-1 border-t border-white/10">
+                  <MapPin className="w-4 h-4 text-primary-light shrink-0 mt-0.5" />
+                  <span>Số 600, đường Nguyễn Văn Cừ (nối dài), Phường An Bình, Thành phố Cần Thơ</span>
+                </div>
               </div>
             </div>
           </motion.div>
