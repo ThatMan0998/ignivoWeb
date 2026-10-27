@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { 
   Check, 
-  ShieldCheck, 
   ArrowRight, 
   Building2, 
   Home, 
@@ -112,14 +111,8 @@ export default function Pricing() {
             transition={{ duration: 0.5 }}
             className="relative flex flex-col justify-between rounded-3xl border-2 border-primary bg-gradient-to-b from-primary/5 via-white to-white p-8 shadow-xl shadow-primary/10"
           >
-            {/* Badge hợp tác */}
-            <div className="absolute -top-3.5 left-8 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-primary/25">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              ĐÃ KÝ KẾT VỚI 2 ĐỐI TÁC CÔNG NGHỆ
-            </div>
-
             <div>
-              <div className="flex items-center justify-between gap-4 mb-4 mt-2">
+              <div className="flex items-center justify-between gap-4 mb-4">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 border border-primary/25 px-3.5 py-1 text-xs font-bold text-primary-dark">
                   <Building2 className="w-3.5 h-3.5 text-primary" />
                   B2B · TECHNOLOGY LICENSING
